@@ -8,21 +8,19 @@ var hmap = new HashMap();
 function getToken(){
     //alert("hello");
     hmap.clear();
-    //var tempo = document.getElementById('dropDown');
-    //console.log('tempo = '+ tempo.options[tempo.selectedIndex].text);
-    //console.log("Select tag value");
-    //console.log(sel);
+    //Pull content from text box on html page
     var doc = document.getElementById("plainjs").value;
     var parsed = esprima.parse(doc);
     console.log("Parsed Code " );
-    console.log(parsed);
+    console.log(parsed.body);
+    //(parsed);
+    //console.log(JSON.stringify(parsed.body));
     
-    //parse_to_reOrder(parsed);
-    //insertFunc(parsed);
-    morphProg(parsed);
-    //strSplit(parsed);
-    //instructionSub(parsed);
-    getCode(parsed);
+    //Switch case to make calls for each element type.
+    morphProg(parsed); 
+    parse_to_reOrder(parsed);   // Instruction Reordering
+    strSplit(parsed);   // String Splitting
+    getCode(parsed);    // Esprima
 }
 function morphProg(x){
         
@@ -40,6 +38,7 @@ function morphProg(x){
             if(element.expression.type === "AssignmentExpression"){
                 findEle(element);
                 parseExp(element.expression.right);
+                instructionSub(element.expression.right); 
             }
             else if (element.expression.type === "CallExpression"){
                 parseExp(element.expression);
@@ -54,7 +53,7 @@ function morphProg(x){
     }, this);
     console.log("New values inside changVal");
     console.log(x);
-    getCode(x);
+    //getCode(x);
 }
 
 function morphVar(e){
@@ -92,6 +91,7 @@ function morphVar(e){
                     console.log("We got it chnged here "+ inrEle.right.name);
                     }
                     parseExp(inrEle);
+                    instructionSub(inrEle); 
                     break;
                 case "Identifier" :
                     key.forEach( function (k) {
@@ -128,6 +128,7 @@ function morphFunc(ele){
     }
     //to check if has inner vals
     if(ele.body.body != 0){morphProg(ele.body)}
+    //parse_to_reOrder(ele.body)
 }
 
 function findEle(p) {
@@ -172,7 +173,7 @@ function findEle(p) {
 }
 
 function parseExp (pExp) {
-        var a;
+    var a;
     if(pExp.type === "BinaryExpression"){
         if (pExp.left.type === "BinaryExpression"){
             console.log("parseExp Inside recursive call for " );
@@ -195,7 +196,7 @@ function parseExp (pExp) {
                 a = hmap.get(pExp.right.name);
                 pExp.right.name = a[a.length -1];
               }
-              //console.log("We got it chnged here "+ exp.left.name);
+              //console.log("We got it chnged here "+ exp.left.name); 
         }
     }
     else if (pExp.type === "CallExpression") {
@@ -259,26 +260,13 @@ function popLocal(elemList){
 }
 function getCode(c){
     var newCode = escodegen.generate(c);
+    console.log(typeof(newCode))
     console.log("Escodegen : "+ newCode);
+    var code = insertFunc(newCode);
     var morph = document.getElementById("metajs");
-    morph.value = newCode;
+    morph.value = code;
     console.log(hmap);
     //hmap.clear();
-}
-
-function strSplit(x){
- 	var t = x.body[0];
- 	var convertedString = escodegen.generate(t);
- 	var i, splitString, original='';
- 	var morph = document.getElementById("metajs");
- 	for(i = 0;i < convertedString.length; i = i+3)
- 	{
- 	splitString = convertedString.substring(i, i+3);
- 	console.log(splitString);
- 	original = original + splitString;
- 	}
- 	console.log("original String : "+original);
-    morph.value = original;
 }
 
 function parse_to_reOrder(x){
@@ -294,13 +282,29 @@ function parse_to_reOrder(x){
     }
     }
 }
+
+function strSplit(x){
+    var t = x.body[0];
+    var convertedString = escodegen.generate(t);
+    var i, splitString, original='';
+    var morph = document.getElementById("metajs");
+    for(i = 0;i < convertedString.length; i = i+3)
+    {
+    splitString = convertedString.substring(i, i+3);
+    console.log(splitString);
+    original = original + splitString;
+    }
+    console.log("original String : "+original);
+   morph.value = original;
+}
+
 function reOrder(x,i,j){
             var temp = x.body[i];
             x.body[i] = x.body[j];
             x.body[j] = temp;
             console.log("switched")
             console.log(x.body);  
-            getCode(x);
+           // getCode(x);
 }
 
 function insertFunc(x){
@@ -310,19 +314,22 @@ return x.split(";").join(";\n"+emptyFunc)
 }
 
 function instructionSub(x){
+    var o;
+    console.log("Old:")
+    console.log(x.right);
     switch(x.operator) {
         case "+" : 
             console.log("hey there")
             x.operator = "-"
             if(x.right.type == "Literal"){
-                var o = {
+                o = {
                     "type":"UnaryExpression",
                     "operator" : "-",
                      "argument": {"type":"Literal","value":x.right.value,"prefix":"true"}
                 };
            }
            else if(x.right.type == "Identifier") {
-                var o = {
+                o = {
                      "type":"UnaryExpression",
                     "operator" : "-",
                     "argument": {"type":"Identifier","name":x.right.name,"prefix":"true"}
@@ -331,14 +338,14 @@ function instructionSub(x){
              break;
         case "-":
             if(x.right.type == "Literal"){
-                var o = {
+                 o = {
                 "type":"UnaryExpression",
                 "operator" : "+",
                  "argument": {"type":"Literal","value":x.right.value,"prefix":"true"}
                 };
             }
             else if(x.right.type == "Identifier") {
-                var o = {
+                 o = {
                  "type":"UnaryExpression",
                  "operator" : "+",
                 "argument": {"type":"Identifier","name":x.right.name,"prefix":"true"}
@@ -349,7 +356,7 @@ function instructionSub(x){
         case "*": 
             x.operator = "/"
             if(x.right.type == "Literal"){
-               var o = {
+                o = {
                     "type":"BinaryExpression",
                     "operator":"/",
                     "left":{"type":"Literal","value":1},
@@ -357,7 +364,7 @@ function instructionSub(x){
                 }
             }
             else{
-                var o = {
+                 o = {
                     "type":"BinaryExpression",
                     "operator":"/",
                     "left":{"type":"Literal","value":1},
@@ -374,7 +381,7 @@ function instructionSub(x){
                     "left":{"type":"Identifier","name":"xOa"},
                     "right":{"type":"Literal","value":x.left.value}
                }
-                var o = {
+                o = {
                 "type":"BinaryExpression",
                 "operator":"*",
                 "left":{"type":"Identifier","name":"xOa"},
@@ -388,7 +395,7 @@ function instructionSub(x){
                 "left":{"type":"Identifier","name":"xOa"},
                 "right":{"type":"Identifier","name":x.left.name}
             }
-            var o = {
+            o = {
                 "type":"BinaryExpression",
                 "operator":"*",
                 "left":{"type":"Identifier","name":"xOa"},
@@ -398,7 +405,7 @@ function instructionSub(x){
         break;
         case "^":
         if(x.right.type == "Literal"){
-           var o = {
+            o = {
            "type":"BinaryExpression",
            "operator":"+",
            "left":{"type":"Literal","value":x.right.value/2},
@@ -407,7 +414,7 @@ function instructionSub(x){
           
        }
        else{
-            var o = {
+            o = {
             "type":"BinaryExpression",
             "operator":"+",
             "left":{"type":"Identifier","name":"("+x.right.name+"/2"},
@@ -417,19 +424,17 @@ function instructionSub(x){
         break;
     }
     x.right = o;
-console.log(x.right);
-}
-var sel;
+    console.log("New: \n")
+    console.log(x.right);
+} 
+
+
 document.addEventListener('DOMContentLoaded', function () {
     var btn = document.getElementById('submit');    
-    var objSelect = document.getElementById("dropDown");
-	if(objSelect){
-    		objSelect.addEventListener('click',function(){
-    		sel = objSelect.options[objSelect.selectedIndex].text;
-    		})
-    }
-    if (btn) {	
-      console.log("Button click");
+    //var objSelect = document.getElementById("dropDown").option;
+    if (btn) {
       btn.addEventListener('click', getToken);
+      //console.log("Select");
+      //console.log(objSelect);
     }
- });
+  });
