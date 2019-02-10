@@ -6,7 +6,6 @@ var hmap = new HashMap();
 //var scope = 0;
 
 function getToken(){
-    //alert("hello");
     hmap.clear();
     //Pull content from text box on html page
     var doc = document.getElementById("plainjs").value;
@@ -17,9 +16,10 @@ function getToken(){
     //console.log(JSON.stringify(parsed.body));
     
     //Switch case to make calls for each element type.
-    morphProg(parsed); 
+    
+    morphProg(parsed);    // Start morphing
     parse_to_reOrder(parsed);   // Instruction Reordering
-    strSplit(parsed);   // String Splitting
+    //strSplit(parsed);   // String Splitting
     getCode(parsed);    // Esprima
 }
 function morphProg(x){
@@ -60,6 +60,8 @@ function morphVar(e){
     var innerElem = e.declarations;
     var oldname;
     //var newname = new Array;
+    
+    // To rename variables outside scope
     innerElem.forEach(function(ele){
         if (ele.id.type === "Identifier") {
              oldname = ele.id.name;
@@ -86,21 +88,20 @@ function morphVar(e){
             switch(inrEle.type){
                 case "BinaryExpression":
                     if (hmap.has(inrEle.right.name)){
-                    arr1 = hmap.get(inrEle.right.name);
-                    inrEle.right.name = arr1[arr1.length-1];
-                    console.log("We got it chnged here "+ inrEle.right.name);
+                        arr1 = hmap.get(inrEle.right.name);
+                        inrEle.right.name = arr1[arr1.length-1];
+                        console.log("We got it chnged here "+ inrEle.right.name);
                     }
                     parseExp(inrEle);
                     instructionSub(inrEle); 
                     break;
                 case "Identifier" :
                     key.forEach( function (k) {
-                    var  arr2 = hmap.get(k);
-                    if (inrEle.name === k){
-                        inrEle.name = arr2[arr2.length-1];
-                        console.log("We got it chnged here "+ inrEle.name);
-                    }
-
+                        var  arr2 = hmap.get(k);
+                        if (inrEle.name === k){
+                            inrEle.name = arr2[arr2.length-1];
+                            console.log("We got it chnged here "+ inrEle.name);
+                        }
                     });
                     break;
             }
@@ -113,22 +114,23 @@ function morphFunc(ele){
     if (ele.id.type === "Identifier") {
         var oldn = ele.id.name;
         ele.id.name = random1.generate({
-        charset: 'alphabetic',
-        length: 2
-       });
-       if(hmap.has(oldn)){
-        var arr1 = hmap.get(oldn);
-        arr1.push(ele.id.name);
-    }
-    else {
-        var newname = new Array;
-        newname.push(ele.id.name);
-        hmap.multi(oldn,newname);
-    }
+            charset: 'alphabetic',
+            length: 2
+        });
+        if(hmap.has(oldn)){
+            var arr1 = hmap.get(oldn);
+            arr1.push(ele.id.name);
+        }
+        else {
+            var newname = new Array;
+            newname.push(ele.id.name);
+            hmap.multi(oldn,newname);
+        }
     }
     //to check if has inner vals
     if(ele.body.body != 0){morphProg(ele.body)}
-    //parse_to_reOrder(ele.body)
+        
+    parse_to_reOrder(ele.body)    // to reoder contents inside a function.
 }
 
 function findEle(p) {
@@ -140,7 +142,7 @@ function findEle(p) {
         if (hmap.has(exp.left.name)){
             var nArray = hmap.get(exp.left.name);
             exp.left.name = nArray[nArray.length - 1];
-         //console.log("We got it chnged here "+ exp.left.name);
+            //console.log("We got it chnged here "+ exp.left.name);
         }
         else{
             console.log("assigning new name to:"+exp.left.name);
@@ -262,6 +264,11 @@ function getCode(c){
     var newCode = escodegen.generate(c);
     console.log(typeof(newCode))
     console.log("Escodegen : "+ newCode);
+    
+    //Function call to Dead code Insertion.
+    
+    //var code = newCode;   // Uncomment to insert dead code
+    
     var code = insertFunc(newCode);
     var morph = document.getElementById("metajs");
     morph.value = code;
@@ -273,13 +280,13 @@ function parse_to_reOrder(x){
     var i;
     console.log("Inside parse")
     if(x.body.length > 1){
-    for(i = 0 ; i<(x.body.length-1); i++){
-        if(x.body[i].type == "VariableDeclaration" && x.body[i+1].type=="VariableDeclaration"
-             && x.body[i+1].declarations[0].init.type=="Literal"){
-            console.log(i)
-            reOrder(x,i,i+1);
+        for(i = 0 ; i<(x.body.length-1); i++){
+            if(x.body[i].type == "VariableDeclaration" && x.body[i+1].type=="VariableDeclaration"
+                 && x.body[i+1].declarations[0].init.type=="Literal"){
+                    console.log(i)
+                    reOrder(x,i,i+1);
+            }
         }
-    }
     }
 }
 
