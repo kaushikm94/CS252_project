@@ -1,0 +1,504 @@
+public class finalMorph extends org.mozilla.javascript.NativeFunction implements org.mozilla.javascript.Script {
+  public finalMorph(org.mozilla.javascript.Scriptable, org.mozilla.javascript.Context, int);
+    Code:
+       0: aload_0
+       1: invokespecial #11
+       4: aload_0
+       5: iload_3
+       6: putfield      #13
+       9: aload_0
+      10: aload_2
+      11: aload_1
+      12: iload_3
+      13: tableswitch   {
+                     2: 72
+                     3: 76
+                     4: 80
+                     5: 84
+                     6: 88
+                     7: 92
+                     8: 96
+                     9: 100
+                    10: 104
+                    11: 108
+               default: 68
+          }
+      68: invokespecial #17
+      71: return
+      72: invokespecial #20
+      75: return
+      76: invokespecial #23
+      79: return
+      80: invokespecial #26
+      83: return
+      84: invokespecial #29
+      87: return
+      88: invokespecial #32
+      91: return
+      92: invokespecial #35
+      95: return
+      96: invokespecial #38
+      99: return
+     100: invokespecial #41
+     103: return
+     104: invokespecial #44
+     107: return
+     108: invokespecial #47
+     111: return
+ finalMorph();
+    Code:
+       0: aload_0
+       1: invokespecial #11
+       4: aload_0
+       5: iconst_0
+       6: putfield      #13
+       9: return
+ static void main(java.lang.String[]);
+    Code:
+       0: new           #2
+       3: dup
+       4: invokespecial #54
+       7: aload_0
+       8: invokestatic  #59
+      11: return
+ final java.lang.Object exec(org.mozilla.javascript.Context, org.mozilla.javascript.Scriptable);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: aload_2
+       3: dup
+       4: aconst_null
+       5: invokevirtual #65
+       8: areturn
+ final java.lang.Object call(org.mozilla.javascript.Context, org.mozilla.javascript.Scriptable, org.mozilla.javascript.Scriptable, java.lang.Object[]);
+    Code:
+       0: aload_1
+       1: invokestatic  #71
+       4: ifne          17
+       7: aload_0
+       8: aload_1
+       9: aload_2
+      10: aload_3
+      11: aload         4
+      13: invokestatic  #75
+      16: areturn
+      17: aload_0
+      18: aload_1
+      19: aload_2
+      20: aload_3
+      21: aload         4
+      23: aload_0
+      24: getfield      #13
+      27: tableswitch   {
+                     1: 88
+                     2: 92
+                     3: 96
+                     4: 100
+                     5: 104
+                     6: 108
+                     7: 112
+                     8: 116
+                     9: 120
+                    10: 124
+                    11: 128
+               default: 84
+          }
+      84: invokestatic  #79
+      87: areturn
+      88: invokestatic  #82
+      91: areturn
+      92: invokestatic  #85
+      95: areturn
+      96: invokestatic  #88
+      99: areturn
+     100: invokestatic  #91
+     103: areturn
+     104: invokestatic  #94
+     107: areturn
+     108: invokestatic  #97
+     111: areturn
+     112: invokestatic  #100
+     115: areturn
+     116: invokestatic  #103
+     119: areturn
+     120: invokestatic  #106
+     123: areturn
+     124: invokestatic  #109
+     127: areturn
+     128: invokestatic  #112
+     131: areturn
+ int getLanguageVersion();
+    Code:
+       0: iconst_0
+       1: ireturn
+ java.lang.String getFunctionName();
+    Code:
+       0: aload_0
+       1: getfield      #13
+       4: tableswitch   {
+                     1: 67
+                     2: 70
+                     3: 73
+                     4: 76
+                     5: 79
+                     6: 82
+                     7: 85
+                     8: 88
+                     9: 91
+                    10: 94
+                    11: 97
+               default: 64
+          }
+      64: ldc           #118
+      66: areturn
+      67: ldc           #120
+      69: areturn
+      70: ldc           #120
+      72: areturn
+      73: ldc           #120
+      75: areturn
+      76: ldc           #122
+      78: areturn
+      79: ldc           #120
+      81: areturn
+      82: ldc           #120
+      84: areturn
+      85: ldc           #120
+      87: areturn
+      88: ldc           #120
+      90: areturn
+      91: ldc           #124
+      93: areturn
+      94: ldc           #120
+      96: areturn
+      97: ldc           #120
+      99: areturn
+ int getParamCount();
+    Code:
+       0: aload_0
+       1: getfield      #13
+       4: tableswitch   {
+                     1: 66
+                     2: 68
+                     3: 70
+                     4: 72
+                     5: 74
+                     6: 76
+                     7: 78
+                     8: 80
+                     9: 82
+                    10: 84
+                    11: 86
+               default: 64
+          }
+      64: iconst_0
+      65: ireturn
+      66: iconst_0
+      67: ireturn
+      68: iconst_0
+      69: ireturn
+      70: iconst_0
+      71: ireturn
+      72: iconst_0
+      73: ireturn
+      74: iconst_0
+      75: ireturn
+      76: iconst_0
+      77: ireturn
+      78: iconst_0
+      79: ireturn
+      80: iconst_0
+      81: ireturn
+      82: iconst_0
+      83: ireturn
+      84: iconst_0
+      85: ireturn
+      86: iconst_0
+      87: ireturn
+ int getParamAndVarCount();
+    Code:
+       0: aload_0
+       1: getfield      #13
+       4: tableswitch   {
+                     1: 66
+                     2: 68
+                     3: 70
+                     4: 72
+                     5: 74
+                     6: 76
+                     7: 78
+                     8: 80
+                     9: 82
+                    10: 84
+                    11: 86
+               default: 64
+          }
+      64: iconst_5
+      65: ireturn
+      66: iconst_0
+      67: ireturn
+      68: iconst_0
+      69: ireturn
+      70: iconst_0
+      71: ireturn
+      72: iconst_5
+      73: ireturn
+      74: iconst_0
+      75: ireturn
+      76: iconst_0
+      77: ireturn
+      78: iconst_0
+      79: ireturn
+      80: iconst_0
+      81: ireturn
+      82: iconst_2
+      83: ireturn
+      84: iconst_0
+      85: ireturn
+      86: iconst_0
+      87: ireturn
+ java.lang.String getParamOrVarName(int);
+    Code:
+       0: aload_0
+       1: getfield      #13
+       4: tableswitch   {
+                     1: 111
+                     2: 113
+                     3: 115
+                     4: 117
+                     5: 163
+                     6: 165
+                     7: 167
+                     8: 169
+                     9: 171
+                    10: 198
+                    11: 200
+               default: 64
+          }
+      64: iload_1
+      65: tableswitch   {
+                     1: 99
+                     2: 102
+                     3: 105
+                     4: 108
+               default: 96
+          }
+      96: ldc           #130
+      98: areturn
+      99: ldc           #120
+     101: areturn
+     102: ldc           #132
+     104: areturn
+     105: ldc           #134
+     107: areturn
+     108: ldc           #122
+     110: areturn
+     111: aconst_null
+     112: areturn
+     113: aconst_null
+     114: areturn
+     115: aconst_null
+     116: areturn
+     117: iload_1
+     118: tableswitch   {
+                     1: 151
+                     2: 154
+                     3: 157
+                     4: 160
+               default: 148
+          }
+     148: ldc           #136
+     150: areturn
+     151: ldc           #120
+     153: areturn
+     154: ldc           #138
+     156: areturn
+     157: ldc           #140
+     159: areturn
+     160: ldc           #124
+     162: areturn
+     163: aconst_null
+     164: areturn
+     165: aconst_null
+     166: areturn
+     167: aconst_null
+     168: areturn
+     169: aconst_null
+     170: areturn
+     171: iload_1
+     172: tableswitch   {
+                     1: 195
+               default: 192
+          }
+     192: ldc           #142
+     194: areturn
+     195: ldc           #120
+     197: areturn
+     198: aconst_null
+     199: areturn
+     200: aconst_null
+     201: areturn
+ java.lang.String getEncodedSource();
+    Code:
+       0: ldc           #145
+       2: aload_0
+       3: getfield      #13
+       6: tableswitch   {
+                     1: 72
+                     2: 80
+                     3: 88
+                     4: 96
+                     5: 105
+                     6: 113
+                     7: 123
+                     8: 133
+                     9: 143
+                    10: 153
+                    11: 163
+               default: 64
+          }
+      64: iconst_0
+      65: sipush        267
+      68: invokevirtual #151
+      71: areturn
+      72: bipush        12
+      74: bipush        24
+      76: invokevirtual #151
+      79: areturn
+      80: bipush        37
+      82: bipush        49
+      84: invokevirtual #151
+      87: areturn
+      88: bipush        69
+      90: bipush        81
+      92: invokevirtual #151
+      95: areturn
+      96: bipush        83
+      98: sipush        241
+     101: invokevirtual #151
+     104: areturn
+     105: bipush        104
+     107: bipush        116
+     109: invokevirtual #151
+     112: areturn
+     113: sipush        129
+     116: sipush        141
+     119: invokevirtual #151
+     122: areturn
+     123: sipush        160
+     126: sipush        172
+     129: invokevirtual #151
+     132: areturn
+     133: sipush        192
+     136: sipush        204
+     139: invokevirtual #151
+     142: areturn
+     143: sipush        206
+     146: sipush        238
+     149: invokevirtual #151
+     152: areturn
+     153: sipush        223
+     156: sipush        235
+     159: invokevirtual #151
+     162: areturn
+     163: sipush        253
+     166: sipush        265
+     169: invokevirtual #151
+     172: areturn
+ boolean getParamOrVarConst(int);
+    Code:
+       0: aload_0
+       1: getfield      #13 
+       4: tableswitch   { 
+                     1: 106
+                     2: 108
+                     3: 110
+                     4: 112
+                     5: 154
+                     6: 156
+                     7: 158
+                     8: 160
+                     9: 162
+                    10: 184
+                    11: 186
+               default: 64
+          }
+      64: iload_1
+      65: tableswitch   { 
+                     1: 98
+                     2: 100
+                     3: 102
+                     4: 104
+               default: 96
+          }
+      96: iconst_0
+      97: ireturn
+      98: iconst_0
+      99: ireturn
+     100: iconst_0
+     101: ireturn
+     102: iconst_0
+     103: ireturn
+     104: iconst_0
+     105: ireturn
+     106: iconst_0
+     107: ireturn
+     108: iconst_0
+     109: ireturn
+     110: iconst_0
+     111: ireturn
+     112: iload_1
+     113: tableswitch   { 
+                     1: 146
+                     2: 148
+                     3: 150
+                     4: 152
+               default: 144
+          }
+     144: iconst_0
+     145: ireturn
+     146: iconst_0
+     147: ireturn
+     148: iconst_0
+     149: ireturn
+     150: iconst_0
+     151: ireturn
+     152: iconst_0
+     153: ireturn
+     154: iconst_0
+     155: ireturn
+     156: iconst_0
+     157: ireturn
+     158: iconst_0
+     159: ireturn
+     160: iconst_0
+     161: ireturn
+     162: iload_1
+     163: tableswitch   { 
+                     1: 182
+               default: 180
+          }
+     180: iconst_0
+     181: ireturn
+     182: iconst_0
+     183: ireturn
+     184: iconst_0
+     185: ireturn
+     186: iconst_0
+     187: ireturn
+  static final {};
+    Code:
+       0: bipush        20
+       2: invokestatic  #250
+       5: putstatic     #177
+       8: bipush        10
+      10: invokestatic  #250
+      13: putstatic     #184
+      16: bipush        30
+      18: invokestatic  #250
+      21: putstatic     #199
+      24: bipush        40
+      26: invokestatic  #250
+      29: putstatic     #225
+      32: return
+}

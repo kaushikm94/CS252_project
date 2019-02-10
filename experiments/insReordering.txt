@@ -1,0 +1,244 @@
+public class insReordering extends org.mozilla.javascript.NativeFunction implements org.mozilla.javascript.Script {
+  public insReordering(org.mozilla.javascript.Scriptable, org.mozilla.javascript.Context, int);
+    Code:
+       0: aload_0
+       1: invokespecial #11
+       4: aload_0
+       5: iload_3
+       6: putfield      #13
+       9: aload_0
+      10: aload_2
+      11: aload_1
+      12: iload_3
+      13: tableswitch   {
+                     2: 36
+               default: 32
+          }
+      32: invokespecial #17
+      35: return
+      36: invokespecial #20
+      39: return
+  public insReordering();
+    Code:
+       0: aload_0
+       1: invokespecial #11
+       4: aload_0
+       5: iconst_0
+       6: putfield      #13
+       9: return
+  public static void main(java.lang.String[]);
+    Code:
+       0: new           #2 
+       3: dup
+       4: invokespecial #27
+       7: aload_0
+       8: invokestatic  #32
+      11: return
+  public final java.lang.Object exec(org.mozilla.javascript.Context, org.mozilla.javascript.Scriptable);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: aload_2
+       3: dup
+       4: aconst_null
+       5: invokevirtual #38
+       8: areturn
+  public final java.lang.Object call(org.mozilla.javascript.Context, org.mozilla.javascript.Scriptable, org.mozilla.javascript.Scriptable, java.lang.Object[]);
+    Code:
+       0: aload_1
+       1: invokestatic  #44
+       4: ifne          17
+       7: aload_0
+       8: aload_1
+       9: aload_2
+      10: aload_3
+      11: aload         4
+      13: invokestatic  #48
+      16: areturn
+      17: aload_0
+      18: aload_1
+      19: aload_2
+      20: aload_3
+      21: aload         4
+      23: aload_0
+      24: getfield      #13
+      27: tableswitch   {
+                     1: 52
+                     2: 56
+               default: 48
+          }
+      48: invokestatic  #52
+      51: areturn
+      52: invokestatic  #55
+      55: areturn
+      56: invokestatic  #58
+      59: areturn
+  public int getLanguageVersion();
+    Code:
+       0: iconst_0
+       1: ireturn
+  public java.lang.String getFunctionName();
+    Code:
+       0: aload_0
+       1: getfield      #13
+       4: tableswitch   {
+                     1: 31
+                     2: 34
+               default: 28
+          }
+      28: ldc           #64
+      30: areturn
+      31: ldc           #66
+      33: areturn
+      34: ldc           #68
+      36: areturn
+  public int getParamCount();
+    Code:
+       0: aload_0
+       1: getfield      #13
+       4: tableswitch   {
+                     1: 30
+                     2: 32
+               default: 28
+          }
+      28: iconst_0
+      29: ireturn
+      30: iconst_0
+      31: ireturn
+      32: iconst_0
+      33: ireturn
+  public int getParamAndVarCount();
+    Code:
+       0: aload_0
+       1: getfield      #13
+       4: tableswitch   {
+                     1: 30
+                     2: 32
+               default: 28
+          }
+      28: iconst_4
+      29: ireturn
+      30: iconst_4
+      31: ireturn
+      32: iconst_1
+      33: ireturn
+  public java.lang.String getParamOrVarName(int);
+    Code:
+       0: aload_0
+       1: getfield      #13
+       4: tableswitch   {
+                     1: 68
+                     2: 108
+               default: 28
+          }
+      28: iload_1
+      29: tableswitch   {
+                     1: 59
+                     2: 62
+                     3: 65
+               default: 56
+          }
+      56: ldc           #74
+      58: areturn
+      59: ldc           #76
+      61: areturn
+      62: ldc           #78
+      64: areturn
+      65: ldc           #66
+      67: areturn
+      68: iload_1
+      69: tableswitch   {
+                     1: 99
+                     2: 102
+                     3: 105
+               default: 96
+          }
+      96: ldc           #74
+      98: areturn
+      99: ldc           #76
+     101: areturn
+     102: ldc           #80
+     104: areturn
+     105: ldc           #68
+     107: areturn
+     108: ldc           #76
+     110: areturn
+  public java.lang.String getEncodedSource();
+    Code:
+       0: ldc           #83
+       2: aload_0
+       3: getfield      #13
+       6: tableswitch   {
+                     1: 36
+                     2: 44
+               default: 28
+          }
+      28: iconst_0
+      29: sipush        130
+      32: invokevirtual #89
+      35: areturn
+      36: bipush        35
+      38: bipush        119
+      40: invokevirtual #89
+      43: areturn
+      44: bipush        96
+      46: bipush        116
+      48: invokevirtual #89
+      51: areturn
+  public boolean getParamOrVarConst(int);
+    Code:
+       0: aload_0
+       1: getfield      #13
+       4: tableswitch   {
+                     1: 64
+                     2: 100
+               default: 28
+          }
+      28: iload_1
+      29: tableswitch   {
+                     1: 58
+                     2: 60
+                     3: 62
+               default: 56
+          }
+      56: iconst_0
+      57: ireturn
+      58: iconst_0
+      59: ireturn
+      60: iconst_0
+      61: ireturn
+      62: iconst_0
+      63: ireturn
+      64: iload_1
+      65: tableswitch   {
+                     1: 94
+                     2: 96
+                     3: 98
+               default: 92
+          }
+      92: iconst_0
+      93: ireturn
+      94: iconst_0
+      95: ireturn
+      96: iconst_0
+      97: ireturn
+      98: iconst_0
+      99: ireturn
+     100: iconst_0
+     101: ireturn
+  static final {};
+    Code:
+       0: bipush        20
+       2: invokestatic  #166 
+       5: putstatic     #115 
+       8: bipush        10
+      10: invokestatic  #166 
+      13: putstatic     #122 
+      16: bipush        30
+      18: invokestatic  #166 
+      21: putstatic     #133 
+      24: bipush        40
+      26: invokestatic  #166 
+      29: putstatic     #150 
+      32: return
+}
