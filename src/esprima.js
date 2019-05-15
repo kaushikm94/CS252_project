@@ -43,11 +43,15 @@ function morphProg(x){
             else if (element.expression.type === "CallExpression"){
                 parseExp(element.expression);
             }
+            else if(element.expression.type === 'undefined'){
+                break;
+            }
             break;
         case "ReturnStatement" :
             if(element.argument){
                 parseExp(element.argument);
             }
+        case "undefined": break;
             
         }
     }, this);
@@ -267,9 +271,10 @@ function getCode(c){
     
     //Function call to Dead code Insertion.
     
-    //var code = newCode;   // Uncomment to insert dead code
+    //var code = newCode;   // Comment to remove deadcode
     
-    var code = insertFunc(newCode);
+    var code = insertFunc(newCode); // Uncomment to insert dead code
+    
     var morph = document.getElementById("metajs");
     morph.value = code;
     console.log(hmap);
@@ -315,6 +320,7 @@ function reOrder(x,i,j){
 }
 
 function insertFunc(x){
+console.log("Inside inserfunc");
 var emptyFunc = "function XyZ() { \n}";
 return x.split(";").join(";\n"+emptyFunc)
 
